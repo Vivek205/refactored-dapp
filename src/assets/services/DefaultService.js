@@ -176,7 +176,7 @@ export default class DefaultService extends React.Component {
               style={{ height: "30px", width: "250px", fontSize: "13px", marginBottom: "5px" }}
               value={this.state.paramString}
               onChange={this.handleFormUpdate}
-            ></input>
+            />
           </div>
         </div>
         <div className="row">

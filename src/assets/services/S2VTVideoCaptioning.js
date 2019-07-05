@@ -134,7 +134,7 @@ export default class S2VTVideoCaptioning extends React.Component {
               style={{ height: "30px", width: "250px", fontSize: "13px", marginBottom: "5px" }}
               value={this.state.url}
               onChange={this.handleFormUpdate}
-            ></input>
+            />
           </div>
         </div>
         <div className="row">
@@ -149,7 +149,7 @@ export default class S2VTVideoCaptioning extends React.Component {
               style={{ height: "30px", width: "250px", fontSize: "13px", marginBottom: "5px" }}
               value={this.state.start_time_sec}
               onChange={this.handleFormUpdate}
-            ></input>
+            />
           </div>
         </div>
         <div className="row">
@@ -164,7 +164,7 @@ export default class S2VTVideoCaptioning extends React.Component {
               style={{ height: "30px", width: "250px", fontSize: "13px", marginBottom: "5px" }}
               value={this.state.stop_time_sec}
               onChange={this.handleFormUpdate}
-            ></input>
+            />
           </div>
         </div>
         <div className="row">

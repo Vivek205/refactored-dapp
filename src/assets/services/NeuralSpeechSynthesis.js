@@ -112,7 +112,7 @@ export default class NeuralSpeechSynthesis extends React.Component {
               value={this.state.text}
               onChange={this.handleFormUpdate}
               onKeyPress={e => this.onKeyPressvalidator(e)}
-            ></textarea>
+            />
           </div>
         </div>
 

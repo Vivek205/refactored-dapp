@@ -19,7 +19,7 @@ const AboutService = ({ classes, isLoggedIn, service }) => {
         <DemoToggler showDemo={isLoggedIn} classes={classes} service={service} />
 
         <div className={classes.backToLink}>
-          <i className="fas fa-arrow-left"></i>
+          <i className="fas fa-arrow-left" />
           <a href="#" title="Back To">
             Back to AI Marketplace
           </a>

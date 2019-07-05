@@ -110,8 +110,8 @@ export default class SNETImageUpload extends React.Component {
             : 5
           : 4
         : this.props.disableUploadTab // Logic for defining the initial tab depending on which are available
-        ? this.props.disableUploadTab + this.props.disableUrlTab
-        : 0,
+          ? this.props.disableUploadTab + this.props.disableUrlTab
+          : 0,
       searchText: null,
       errorMessage: null,
       displayError: false,
@@ -521,8 +521,8 @@ export default class SNETImageUpload extends React.Component {
                     padding: spacingUnit,
                   }}
                 >
-                  Image file must be smaller than {this.props.maxImageSize / 1000000}mb. Source images are not saved on
-                  the servers after the job is processed.
+                  Image file must be smaller than {this.props.maxImageSize / 1000000}
+                  mb. Source images are not saved on the servers after the job is processed.
                 </Typography>
               </Grid>
             </Grid>
@@ -1135,7 +1135,7 @@ export default class SNETImageUpload extends React.Component {
               borderLeft: "3px solid white",
               height: this.tabHeight,
             }}
-          ></div>
+          />
           <div
             style={{
               position: "absolute",
@@ -1146,7 +1146,7 @@ export default class SNETImageUpload extends React.Component {
               borderRadius: "15px",
               backgroundColor: "white",
             }}
-          ></div>
+          />
           <UnfoldMoreIcon
             style={{
               color: this.mainColor,
@@ -1235,27 +1235,30 @@ export default class SNETImageUpload extends React.Component {
                           label={<span style={this.tabLabelStyle}>Gallery</span>}
                         />
                       )}
-                    {this.state.mainState === "display" && !this.props.disableInputTab && (
-                      <Tab
-                        style={{ minWidth: "5%" }}
-                        value={3}
-                        label={<span style={this.tabLabelStyle}>{this.props.inputTabTitle}</span>}
-                      />
-                    )}
-                    {this.state.mainState === "display" && !this.props.disableOutputTab && (
-                      <Tab
-                        style={{ minWidth: "5%" }}
-                        value={4}
-                        label={<span style={this.tabLabelStyle}>{this.props.outputTabTitle}</span>}
-                      />
-                    )}
-                    {this.state.mainState === "display" && !this.props.disableComparisonTab && (
-                      <Tab
-                        style={{ minWidth: "5%" }}
-                        value={5}
-                        label={<span style={this.tabLabelStyle}>{this.props.comparisonTabTitle}</span>}
-                      />
-                    )}
+                    {this.state.mainState === "display" &&
+                      !this.props.disableInputTab && (
+                        <Tab
+                          style={{ minWidth: "5%" }}
+                          value={3}
+                          label={<span style={this.tabLabelStyle}>{this.props.inputTabTitle}</span>}
+                        />
+                      )}
+                    {this.state.mainState === "display" &&
+                      !this.props.disableOutputTab && (
+                        <Tab
+                          style={{ minWidth: "5%" }}
+                          value={4}
+                          label={<span style={this.tabLabelStyle}>{this.props.outputTabTitle}</span>}
+                        />
+                      )}
+                    {this.state.mainState === "display" &&
+                      !this.props.disableComparisonTab && (
+                        <Tab
+                          style={{ minWidth: "5%" }}
+                          value={5}
+                          label={<span style={this.tabLabelStyle}>{this.props.comparisonTabTitle}</span>}
+                        />
+                      )}
                   </Tabs>
                 </MuiThemeProvider>
               </Grid>
@@ -1296,48 +1299,50 @@ export default class SNETImageUpload extends React.Component {
                   alignItems: "center",
                 }}
               >
-                {this.state.mainState === "uploaded" && !this.props.disableResetButton && (
-                  <Fade in={this.state.mainState === "uploaded"}>
-                    <Tooltip
-                      title={
-                        <Typography style={{ fontFamily: snetFont, fontSize: 12, color: "white" }}>
-                          Click to reset!
-                        </Typography>
-                      }
-                    >
-                      <IconButton onClick={this.handleImageReset.bind(this)}>
-                        <RefreshIcon
-                          style={{
-                            fontSize: 20,
-                            color: this.mainColor,
-                          }}
-                        />
-                      </IconButton>
-                    </Tooltip>
-                  </Fade>
-                )}
-                {this.state.mainState === "display" && !this.props.disableDownloadButton && (
-                  <Fade in={this.state.mainState === "display"}>
-                    <Tooltip
-                      title={
-                        <Typography style={{ fontFamily: snetFont, fontSize: 12, color: "white" }}>
-                          Download output image
-                        </Typography>
-                      }
-                    >
-                      <a href={this.state.outputImage} download={this.state.outputImageName}>
-                        <IconButton>
-                          <CloudDownloadIcon
+                {this.state.mainState === "uploaded" &&
+                  !this.props.disableResetButton && (
+                    <Fade in={this.state.mainState === "uploaded"}>
+                      <Tooltip
+                        title={
+                          <Typography style={{ fontFamily: snetFont, fontSize: 12, color: "white" }}>
+                            Click to reset!
+                          </Typography>
+                        }
+                      >
+                        <IconButton onClick={this.handleImageReset.bind(this)}>
+                          <RefreshIcon
                             style={{
                               fontSize: 20,
                               color: this.mainColor,
                             }}
                           />
                         </IconButton>
-                      </a>
-                    </Tooltip>
-                  </Fade>
-                )}
+                      </Tooltip>
+                    </Fade>
+                  )}
+                {this.state.mainState === "display" &&
+                  !this.props.disableDownloadButton && (
+                    <Fade in={this.state.mainState === "display"}>
+                      <Tooltip
+                        title={
+                          <Typography style={{ fontFamily: snetFont, fontSize: 12, color: "white" }}>
+                            Download output image
+                          </Typography>
+                        }
+                      >
+                        <a href={this.state.outputImage} download={this.state.outputImageName}>
+                          <IconButton>
+                            <CloudDownloadIcon
+                              style={{
+                                fontSize: 20,
+                                color: this.mainColor,
+                              }}
+                            />
+                          </IconButton>
+                        </a>
+                      </Tooltip>
+                    </Fade>
+                  )}
               </Grid>
             </Grid>
           </Grid>

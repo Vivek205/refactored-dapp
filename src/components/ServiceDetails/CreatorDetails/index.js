@@ -18,15 +18,15 @@ class CreatorDetails extends Component {
         </div>
         <div className={classes.iconContainer}>
           <div className={classes.algoContainer}>
-            <i className="far fa-file-alt"></i>
+            <i className="far fa-file-alt" />
             <span>28 Algorithms</span>
           </div>
           <div className={classes.followContainer}>
-            <i className="far fa-heart"></i>
+            <i className="far fa-heart" />
             <span>Follow</span>
           </div>
           <div className={classes.contactContainer}>
-            <i className="far fa-comment-alt"></i>
+            <i className="far fa-comment-alt" />
             <span>Contact</span>
           </div>
         </div>

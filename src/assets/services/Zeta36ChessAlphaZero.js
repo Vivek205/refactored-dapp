@@ -137,7 +137,7 @@ export default class Zeta36ChessAlphaZero extends React.Component {
               placeholder={"eg: Your Name"}
               value={this.state.uid}
               onChange={this.handleFormUpdate}
-            ></input>
+            />
           </div>
         </div>
         <div className="row">
@@ -152,7 +152,7 @@ export default class Zeta36ChessAlphaZero extends React.Component {
               placeholder={"eg: c2c4"}
               value={this.state.move}
               onChange={this.handleFormUpdate}
-            ></input>
+            />
           </div>
         </div>
         <div className="row">
@@ -167,7 +167,7 @@ export default class Zeta36ChessAlphaZero extends React.Component {
               placeholder={"eg: empty or restart (the game)"}
               value={this.state.cmd}
               onChange={this.handleFormUpdate}
-            ></input>
+            />
           </div>
         </div>
         <div className="row">

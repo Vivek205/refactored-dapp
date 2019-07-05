@@ -436,7 +436,7 @@ export default class TimeSeriesAnomalyDiscoveryService extends React.Component {
               forceRender={this.state.first_render}
             />
           </Grid>
-          <Grid item xs={1}></Grid>
+          <Grid item xs={1} />
           <Grid item xs={12} style={{ textAlign: "center" }}>
             <h3>Anomalies</h3>
             <p style={{ color: "grey", fontStyle: "italic", fontSize: 13 }}>
@@ -472,7 +472,7 @@ export default class TimeSeriesAnomalyDiscoveryService extends React.Component {
                   onChange={this.thresholdChange}
                   onDragEnd={this.updateRenderTimeSeries}
                   vertical
-                ></Slider>
+                />
               </div>
             </Tooltip>
           </Grid>

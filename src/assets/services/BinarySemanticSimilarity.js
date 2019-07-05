@@ -114,7 +114,7 @@ export default class BinarySemanticSimilarity extends React.Component {
               value={this.state.a}
               onChange={this.handleFormUpdate}
               onKeyPress={e => this.onKeyPressvalidator(e)}
-            ></textarea>
+            />
           </div>
         </div>
         <div className="row">
@@ -132,7 +132,7 @@ export default class BinarySemanticSimilarity extends React.Component {
               value={this.state.b}
               onChange={this.handleFormUpdate}
               onKeyPress={e => this.onKeyPressvalidator(e)}
-            ></textarea>
+            />
           </div>
         </div>
         <div className="row">

@@ -142,7 +142,7 @@ export default class AutomaticSpeechRecognition extends React.Component {
               style={{ height: "30px", width: "250px", fontSize: "13px", marginBottom: "5px" }}
               value={this.state.a}
               onChange={this.handleFormUpdate}
-            ></input>
+            />
           </div>
         </div>
         <div className="row">
@@ -151,7 +151,7 @@ export default class AutomaticSpeechRecognition extends React.Component {
           </div>
           <div id="audio-container" className="col-md-3 col-lg-2">
             <audio controls style={{ height: "30px", width: "250px", fontSize: "13px", marginBottom: "5px" }}>
-              <source id="asrAudio" src="http://bonch-ikt.ru:8209/tacotron1/audio/hoho.wav" type="audio/wav"></source>
+              <source id="asrAudio" src="http://bonch-ikt.ru:8209/tacotron1/audio/hoho.wav" type="audio/wav" />
             </audio>
           </div>
         </div>
