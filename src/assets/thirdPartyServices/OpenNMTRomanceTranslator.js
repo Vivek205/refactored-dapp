@@ -169,7 +169,7 @@ export default class OpenNMTRomanceTranslator extends React.Component {
               placeholder={"or URL with text file"}
               value={this.state.sentences_url}
               onChange={this.handleFormUpdate}
-            ></input>
+            />
           </div>
         </div>
         <div className="row">

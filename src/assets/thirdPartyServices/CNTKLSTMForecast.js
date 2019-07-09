@@ -171,7 +171,7 @@ export default class CNTKLSTMForecast extends React.Component {
               placeholder={"URL (csv) or yahoo (financial)"}
               value={this.state.source}
               onChange={this.handleFormUpdate}
-            ></input>
+            />
           </div>
         </div>
         <div className="row">
@@ -186,7 +186,7 @@ export default class CNTKLSTMForecast extends React.Component {
               placeholder={"eg: SPY (financial)"}
               value={this.state.contract}
               onChange={this.handleFormUpdate}
-            ></input>
+            />
           </div>
         </div>
         <div className="row">
@@ -201,7 +201,7 @@ export default class CNTKLSTMForecast extends React.Component {
               style={{ height: "30px", width: "250px", fontSize: "13px", marginBottom: "5px" }}
               value={this.state.window_len}
               onChange={this.handleFormUpdate}
-            ></input>
+            />
           </div>
         </div>
         <div className="row">
@@ -216,7 +216,7 @@ export default class CNTKLSTMForecast extends React.Component {
               style={{ height: "30px", width: "250px", fontSize: "13px", marginBottom: "5px" }}
               value={this.state.word_len}
               onChange={this.handleFormUpdate}
-            ></input>
+            />
           </div>
         </div>
         <div className="row">
@@ -231,7 +231,7 @@ export default class CNTKLSTMForecast extends React.Component {
               style={{ height: "30px", width: "250px", fontSize: "13px", marginBottom: "5px" }}
               value={this.state.alphabet_size}
               onChange={this.handleFormUpdate}
-            ></input>
+            />
           </div>
         </div>
         <div className="row">

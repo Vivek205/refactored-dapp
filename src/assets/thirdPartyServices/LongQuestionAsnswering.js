@@ -114,7 +114,7 @@ export default class LongQuestionAsnswering extends React.Component {
               value={this.state.context}
               onChange={this.handleFormUpdate}
               onKeyPress={e => this.onKeyPressvalidator(e)}
-            ></textarea>
+            />
           </div>
         </div>
         <div className="row">
@@ -132,7 +132,7 @@ export default class LongQuestionAsnswering extends React.Component {
               value={this.state.question}
               onChange={this.handleFormUpdate}
               onKeyPress={e => this.onKeyPressvalidator(e)}
-            ></textarea>
+            />
           </div>
         </div>
         <div className="row">

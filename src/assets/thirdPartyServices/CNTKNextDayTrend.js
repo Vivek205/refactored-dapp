@@ -136,7 +136,7 @@ export default class CNTKNextDayTrend extends React.Component {
               placeholder={"eg: yahoo"}
               value={this.state.source}
               onChange={this.handleFormUpdate}
-            ></input>
+            />
           </div>
         </div>
         <div className="row">
@@ -151,7 +151,7 @@ export default class CNTKNextDayTrend extends React.Component {
               placeholder={"eg: SPY"}
               value={this.state.contract}
               onChange={this.handleFormUpdate}
-            ></input>
+            />
           </div>
         </div>
         <div className="row">

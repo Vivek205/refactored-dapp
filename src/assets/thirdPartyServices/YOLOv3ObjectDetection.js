@@ -135,7 +135,8 @@ export default class YOLOv3ObjectDetection extends React.Component {
       <React.Fragment>
         <div className="row">
           <div className="col-md-3 col-lg-3" style={{ padding: "10px", fontSize: "13px", marginLeft: "10px" }}>
-            Confidence ({this.state.confidence.toFixed(2)}):{" "}
+            Confidence ({this.state.confidence.toFixed(2)}
+            ):{" "}
           </div>
           <div className="col-md-3 col-lg-3" style={{ width: "280px" }}>
             <Slider

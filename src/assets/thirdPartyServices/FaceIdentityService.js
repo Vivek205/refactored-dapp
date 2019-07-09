@@ -125,7 +125,7 @@ class FaceIdentityBadge extends React.Component {
         height={this.height}
         ref={this.canvas_ref}
         value={JSON.stringify(this.props.identity)}
-      ></canvas>
+      />
     );
   }
 }
