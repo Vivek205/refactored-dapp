@@ -39,7 +39,10 @@ const ForgotPasswordSubmit = ({ history, error, username, forgotPasswordSubmit }
             Validate
           </button>
         </div>
-        <p>fghjk{error}</p>
+        <p>
+          fghjk
+          {error}
+        </p>
         <MessageBox error={error} />
       </form>
     </div>
