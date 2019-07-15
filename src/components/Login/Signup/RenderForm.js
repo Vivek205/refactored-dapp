@@ -65,9 +65,8 @@ const RenderForm = ({
               value={email}
               onChange={handleEmail}
             />
-            {email !== "" && !isValidEmail(email) && (
-              <span className={classes.usernameError}>Error msg - invalid email</span>
-            )}
+            {email !== "" &&
+              !isValidEmail(email) && <span className={classes.usernameError}>Error msg - invalid email</span>}
           </div>
           <TextField
             id="outlined-password-input"
