@@ -1,6 +1,5 @@
 export const useStyles = theme => ({
   tabsContainer: {
-    width: 630,
     paddingTop: 41,
     margin: "0 auto",
     "& ul": {
@@ -28,7 +27,6 @@ export const useStyles = theme => ({
         display: "inline-block",
         backgroundColor: theme.palette.text.lightGray,
         verticalAlign: "middle",
-        "@media (max-width:724px)": { display: "none" },
       },
       "& i": {
         marginRight: 5,
