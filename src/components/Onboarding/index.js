@@ -73,17 +73,19 @@ class Onboarding extends Component {
     ];
 
     return (
-      <div className={classes.onboardingContainer}>
-        {OnboardingDetails.map((item, index) => (
-          <OnboardingContainer
-            key={item.title}
-            classes={classes}
-            item={item}
-            active={activeSection === index + 1}
-            activeSection={activeSection}
-            progressText={progressText}
-          />
-        ))}
+      <div className={classes.onboardingMainContainer}>
+        <div className={classes.onboardingContainer}>
+          {OnboardingDetails.map((item, index) => (
+            <OnboardingContainer
+              key={item.title}
+              classes={classes}
+              item={item}
+              active={activeSection === index + 1}
+              activeSection={activeSection}
+              progressText={progressText}
+            />
+          ))}
+        </div>
       </div>
     );
   }

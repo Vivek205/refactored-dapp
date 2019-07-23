@@ -7,7 +7,7 @@ export const useStyles = theme => ({
     flexBasis: "100%",
     maxWidth: "71%",
     margin: "0 auto",
-    padding: "30px 0",
+    padding: "14px 0",
     "& h1": { margin: 0 },
     "& p": {
       margin: 0,
