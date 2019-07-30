@@ -8,7 +8,7 @@ export const useStyles = theme => ({
       fontSize: 32,
       fontWeight: 600,
       color: theme.palette.text.darkShadedGray,
-      letterSpacing: "-0.5",
+      letterSpacing: -0.5,
     },
   },
   loginForm: {
