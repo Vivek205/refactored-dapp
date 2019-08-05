@@ -104,7 +104,7 @@ const theme = createMuiTheme({
   },
   typography: {
     primary: {
-      main: ["OpenSans"],
+      main: ["Open Sans"],
     },
     secondary: {
       main: ["Raleway"],
