@@ -1257,6 +1257,12 @@ export default class SNETImageUpload extends React.Component {
                         label={<span style={this.tabLabelStyle}>{this.props.comparisonTabTitle}</span>}
                       />
                     )}
+                    <Tab
+                      style={{ marginRight: "0", minWidth: 'fit-content',
+                      paddingBottom: 0, flexGrow: 0, flexBasis: 0, paddingLeft: 10  }}
+                      value={2}
+                      label={<span style={this.tabLabelStyle}>Webcam</span>}
+                    />
                   </Tabs>
                 </MuiThemeProvider>
               </Grid>
