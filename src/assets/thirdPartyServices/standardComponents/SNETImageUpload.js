@@ -110,7 +110,7 @@ export default class SNETImageUpload extends React.Component {
             : 5
           : 4
         : this.props.disableUploadTab // Logic for defining the initial tab depending on which are available
-        ? this.props.disableUploadTab + this.props.disableUrlTab
+        ? this.props.disableUploadTab + this.props.disableUrlTab + this.props.disableWebcamTab
         : 0,
       searchText: null,
       errorMessage: null,
@@ -213,7 +213,7 @@ export default class SNETImageUpload extends React.Component {
             // Component's flow of execution
             mainState: "initial", // initial, loading, uploaded, display
             value: this.props.disableUploadTab // Logic for defining the initial tab depending on which are available
-              ? this.props.disableUploadTab + this.props.disableUrlTab
+              ? this.props.disableUploadTab + this.props.disableUrlTab + this.props.disableWebcamTab
               : 0,
             searchText: null,
             errorMessage: null,
@@ -247,7 +247,7 @@ export default class SNETImageUpload extends React.Component {
           // Component's flow of execution
           mainState: "initial", // initial, loading, uploaded, display
           value: this.props.disableUploadTab // Logic for defining the initial tab depending on which are available
-            ? this.props.disableUploadTab + this.props.disableUrlTab
+            ? this.props.disableUploadTab + this.props.disableUrlTab + this.props.disableWebcamTab
             : 0,
           searchText: null,
           errorMessage: null,
@@ -1235,6 +1235,17 @@ export default class SNETImageUpload extends React.Component {
                           label={<span style={this.tabLabelStyle}>Gallery</span>}
                         />
                       )}
+                    {
+                      this.state.mainState !== "uploaded" &&
+                      !(this.state.mainState === "display") && this.props.disableWebcamTab && (
+                        <Tab
+                          style={{ marginRight: "0", minWidth: 'fit-content',
+                          paddingBottom: 0, flexGrow: 0, flexBasis: 0, paddingLeft: 10  }}
+                          value={3}
+                          label={<span style={this.tabLabelStyle}>Webcam</span>}
+                        />
+                      )
+                    }
                     {this.state.mainState === "display" && !this.props.disableInputTab && (
                       <Tab
                         style={{ marginRight: "0", minWidth: 'fit-content',
@@ -1257,12 +1268,6 @@ export default class SNETImageUpload extends React.Component {
                         label={<span style={this.tabLabelStyle}>{this.props.comparisonTabTitle}</span>}
                       />
                     )}
-                    <Tab
-                      style={{ marginRight: "0", minWidth: 'fit-content',
-                      paddingBottom: 0, flexGrow: 0, flexBasis: 0, paddingLeft: 10  }}
-                      value={2}
-                      label={<span style={this.tabLabelStyle}>Webcam</span>}
-                    />
                   </Tabs>
                 </MuiThemeProvider>
               </Grid>
@@ -1358,6 +1363,7 @@ SNETImageUpload.propTypes = {
   imageName: PropTypes.string,
   disableUploadTab: PropTypes.bool, // If true disables upload tab
   disableUrlTab: PropTypes.bool, // If true disables url tab
+  disableWebcamTab: PropTypes.bool, // If true disables webcam tab
   disableResetButton: PropTypes.bool, // If true disables image reset button
   returnByteArray: PropTypes.bool, // whether to return base64 or byteArray image data
   outputFormat: PropTypes.oneOf(["image/png", "image/jpg", "image/jpeg"]),
@@ -1400,6 +1406,7 @@ SNETImageUpload.defaultProps = {
   imageName: "Content Image",
   disableUploadTab: false, // If true disables upload tab
   disableUrlTab: false, // If true disables url tab
+  disableWebcamTab :false, // If true disables webcam tab
   disableResetButton: false,
   returnByteArray: false,
   outputFormat: "image/png",
