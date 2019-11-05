@@ -20,7 +20,7 @@ const backgroundColor = {
   info: alertTypes.INFO,
 };
 
-const AlertBox = ({ classes, message, type, link }) => {
+export const AlertBox = ({ classes, message, type, link }) => {
   if (message) {
     return (
       <p className={clsx(classes.messageBox, classes[backgroundColor[type]])}>
