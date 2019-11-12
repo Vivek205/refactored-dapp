@@ -10,6 +10,7 @@ import { withStyles } from "@material-ui/styles";
 import AlertBox, { alertTypes } from "../AlertBox";
 import { useStyles } from "./styles";
 import { walletTypes } from "../../../Redux/actionCreators/UserActions";
+import { setNetworkChangeOverlay, NETWORK_CHANGE_OVERLAY } from "../../../Redux/actionCreators/ModalsActions";
 
 const accountChangeAlert = {
   header: "Incorrect Metamask Account",
@@ -26,14 +27,12 @@ const networkChangeAlert = {
 };
 
 class NetworkChangeOverlay extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { alert: {}, ...this.showMetaMaskConfigMismatchOverlay() };
-  }
+  state = { alert: {} };
 
   componentDidMount() {
     window.addEventListener("snetMMAccountChanged", this.handleMetaMaskAccountChange);
     window.addEventListener("snetMMNetworkChanged", this.handleMetaMaskNetworkChange);
+    this.showMetaMaskConfigMismatchOverlay();
   }
 
   componentWillUnmount() {
@@ -41,28 +40,44 @@ class NetworkChangeOverlay extends Component {
     document.removeEventListener("snetMMNetworkChanged", this.handleMetaMaskNetworkChange);
   }
 
-  showMetaMaskConfigMismatchOverlay = () => {
+  componentDidUpdate = prevProps => {
     const { wallet } = this.props;
+    if (wallet.type !== prevProps.wallet.type) {
+      this.showMetaMaskConfigMismatchOverlay();
+    }
+  };
+
+  showMetaMaskConfigMismatchOverlay = () => {
+    const { wallet, setOverlayOpen } = this.props;
     if (wallet && wallet.type !== walletTypes.METAMASK) {
-      return { invalidMetaMaskDetails: false, alert: {} };
+      setOverlayOpen(false);
+      this.setState({ alert: {} });
+      return;
     }
 
     const web3Provider = window.ethereum;
     if (!web3Provider) {
-      return { invalidMetaMaskDetails: false, alert: {} };
+      setOverlayOpen(false);
+      this.setState({ alert: {} });
+      return;
     }
 
     const sameNetwork = web3Provider.networkVersion === process.env.REACT_APP_ETH_NETWORK;
+
     if (!sameNetwork) {
-      return { invalidMetaMaskDetails: true, alert: networkChangeAlert };
+      setOverlayOpen(true);
+      this.setState({ alert: networkChangeAlert });
+      return;
     }
 
     const sameAddress = web3Provider.selectedAddress.toLowerCase() === wallet.address.toLowerCase();
-    return { invalidMetaMaskDetails: !sameAddress, alert: accountChangeAlert };
+    setOverlayOpen(!sameAddress);
+    this.setState({ alert: accountChangeAlert });
+    return;
   };
 
   handleMetaMaskAccountChange = event => {
-    const { wallet } = this.props;
+    const { wallet, setOverlayOpen } = this.props;
     if (wallet.type !== walletTypes.METAMASK) {
       return;
     }
@@ -71,24 +86,25 @@ class NetworkChangeOverlay extends Component {
       detail: { address },
     } = event;
     const sameAddress = address.toLowerCase() === currentAddress.toLowerCase();
-
-    this.setState({ invalidMetaMaskDetails: !sameAddress, alert: accountChangeAlert });
+    setOverlayOpen(!sameAddress);
+    this.setState({ alert: accountChangeAlert });
   };
 
   handleMetaMaskNetworkChange = ({ detail: { network } }) => {
-    const { wallet } = this.props;
+    const { wallet, setOverlayOpen } = this.props;
     if (wallet.type !== walletTypes.METAMASK) {
       return;
     }
     const sameNetwork = network === process.env.REACT_APP_ETH_NETWORK;
-    this.setState({ invalidMetaMaskDetails: !sameNetwork, alert: networkChangeAlert });
+    setOverlayOpen(!sameNetwork);
+    this.setState({ alert: networkChangeAlert });
   };
 
   render() {
-    const { classes } = this.props;
-    const { alert, invalidMetaMaskDetails } = this.state;
+    const { classes, openNetworkChangeOverlay } = this.props;
+    const { alert } = this.state;
     return (
-      <Modal disableBackdropClick open={invalidMetaMaskDetails}>
+      <Modal disableBackdropClick open={openNetworkChangeOverlay}>
         <Card className={classes.card}>
           <CardHeader title={<h4>{alert.header}</h4>} />
           <Divider />
@@ -103,6 +119,14 @@ class NetworkChangeOverlay extends Component {
 
 const mapStateToProps = state => ({
   wallet: state.userReducer.wallet,
+  openNetworkChangeOverlay: state.modalsReducer[NETWORK_CHANGE_OVERLAY],
 });
 
-export default connect(mapStateToProps)(withStyles(useStyles)(NetworkChangeOverlay));
+const mapDispatchToProps = dispatch => ({
+  setOverlayOpen: show => dispatch(setNetworkChangeOverlay(show)),
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withStyles(useStyles)(NetworkChangeOverlay));
