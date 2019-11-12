@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useEffect } from "react";
+import React, { Fragment, useEffect } from "react";
 import { withStyles } from "@material-ui/styles";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
@@ -10,7 +10,7 @@ import NextAction from "./NextAction";
 import { channelInfo, anyGeneralWallet } from "../../../../../../../Redux/reducers/UserReducer";
 import TopupWallet from "./TopupWallet";
 import CreateWallet from "./CreateWallet";
-import { paymentActions } from "../../../../../../../Redux/actionCreators";
+import { paymentActions, modalsActions } from "../../../../../../../Redux/actionCreators";
 import LinkProvider from "./LinkProvider";
 import { userProfileRoutes } from "../../../../../../UserProfile";
 import { anyPendingTxn } from "../../../../../../../Redux/reducers/PaymentReducer";
@@ -23,16 +23,25 @@ export const paymentTitles = {
 };
 
 const GeneralAccountWallet = props => {
-  const { classes, channelInfo, handleContinue, paypalInProgress, anyGeneralWallet, anyPendingTxn } = props;
-
-  const [showCreateWalletPopup, setShowCreateWalletPopup] = useState(false);
-  const [showTopupWallet, setShowTopupWallet] = useState(false);
-  const [showLinkProvider, setShowLinkProvider] = useState(false);
+  const {
+    classes,
+    channelInfo,
+    handleContinue,
+    paypalInProgress,
+    anyGeneralWallet,
+    anyPendingTxn,
+    showCreateWallet,
+    setShowCreateWallet,
+    showTopupWallet,
+    setShowTopupWallet,
+    showLinkProvider,
+    setShowLinkProvider,
+  } = props;
 
   useEffect(() => {
     switch (paypalInProgress.orderType) {
       case orderTypes.CREATE_WALLET: {
-        setShowCreateWalletPopup(true);
+        setShowCreateWallet(true);
         return;
       }
       case orderTypes.TOPUP_WALLET: {
@@ -44,7 +53,7 @@ const GeneralAccountWallet = props => {
         return;
       }
     }
-  }, [paypalInProgress.orderType]);
+  }, [paypalInProgress.orderType, setShowCreateWallet, setShowTopupWallet, setShowLinkProvider]);
 
   return (
     <Fragment>
@@ -60,14 +69,14 @@ const GeneralAccountWallet = props => {
         />
         <NextAction
           channel={channelInfo}
-          setShowCreateWalletPopup={setShowCreateWalletPopup}
+          setShowCreateWalletPopup={setShowCreateWallet}
           setShowLinkProvider={setShowLinkProvider}
           handleContinue={handleContinue}
           anyPendingTxn={anyPendingTxn}
           anyGeneralWallet={anyGeneralWallet}
         />
       </div>
-      <CreateWallet visible={showCreateWalletPopup} setVisibility={setShowCreateWalletPopup} />
+      <CreateWallet visible={showCreateWallet} setVisibility={setShowCreateWallet} />
       <TopupWallet visible={showTopupWallet} setVisibility={setShowTopupWallet} />
       <LinkProvider visible={showLinkProvider} setVisibility={setShowLinkProvider} />
     </Fragment>
@@ -80,10 +89,16 @@ const mapStateToProps = state => ({
   wallet: state.userReducer.wallet,
   anyGeneralWallet: anyGeneralWallet(state),
   anyPendingTxn: anyPendingTxn(state),
+  showCreateWallet: state.modalsReducer[modalsActions.CREATE_WALLET_MODAL],
+  showTopupWallet: state.modalsReducer[modalsActions.TOPUP_WALLET_MODAL],
+  showLinkProvider: state.modalsReducer[modalsActions.LINK_PROVIDER_MODAL],
 });
 
 const mapDispatchToProps = dispatch => ({
   fetchOrderDetails: orderId => dispatch(paymentActions.fetchOrderDetails(orderId)),
+  setCreateWalletModal: show => dispatch(modalsActions.setCreateWalletModal(show)),
+  setShowTopupWallet: show => dispatch(modalsActions.setTopupWalletModal(show)),
+  setShowLinkProvider: show => dispatch(modalsActions.setLinkProviderModal(show)),
 });
 
 export default connect(
