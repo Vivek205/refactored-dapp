@@ -14,7 +14,7 @@ import { initSdk } from "../../../../../../../utility/sdk";
 import { cogsToAgi } from "../../../../../../../utility/PricingStrategy";
 import { currentServiceDetails, pricing } from "../../../../../../../Redux/reducers/ServiceDetailsReducer";
 import PaymentChannelManagement from "../../../../../../../utility/PaymentChannelManagement";
-import { loaderActions, userActions } from "../../../../../../../Redux/actionCreators";
+import { loaderActions, userActions, modalsActions } from "../../../../../../../Redux/actionCreators";
 import { LoaderContent } from "../../../../../../../utility/constants/LoaderContent";
 import { useStyles } from "./style";
 import { walletTypes } from "../../../../../../../Redux/actionCreators/UserActions";
@@ -37,7 +37,6 @@ class MetamaskFlow extends Component {
     mpeBal: "0",
     selectedPayType: payTypes.CHANNEL_BALANCE,
     disabledPayTypes: [],
-    showPurchaseDialog: false,
     noOfServiceCalls: 1,
     totalPrice: cogsToAgi(this.props.pricing.price_in_cogs),
     alert: {},
@@ -140,11 +139,11 @@ class MetamaskFlow extends Component {
   };
 
   handlePurchaseDialogOpen = () => {
-    this.setState({ showPurchaseDialog: true });
+    this.props.setPurchaseModal(true);
   };
 
   handlePurchaseDialogClose = () => {
-    this.setState({ showPurchaseDialog: false });
+    this.props.setPurchaseModal(false);
   };
 
   handleNoOfCallsChange = event => {
@@ -212,10 +211,9 @@ class MetamaskFlow extends Component {
   };
 
   render() {
-    const { classes } = this.props;
+    const { classes, showPurchaseModal } = this.props;
     const {
       MMconnected,
-      showPurchaseDialog,
       selectedPayType,
       disabledPayTypes,
       noOfServiceCalls,
@@ -235,7 +233,7 @@ class MetamaskFlow extends Component {
     }
     return (
       <div className={classes.PurchaseFlowContainer}>
-        <PurchaseDialog show={showPurchaseDialog} onClose={this.handlePurchaseDialogClose} />
+        <PurchaseDialog show={showPurchaseModal} onClose={this.handlePurchaseDialogClose} />
         <Typography variant="body1" className={classes.PurchaseFlowDescription}>
           Transfer the style of a “style Image” to a “content image” by choosing them in the boxes below. You can upload
           a a file from your computer, URL, or select image from the gallery. You can specify additional parameters in
@@ -326,6 +324,7 @@ const mapStateToProps = state => ({
   pricing: pricing(state),
   wallet: state.userReducer.wallet,
   walletList: state.userReducer.walletList,
+  showPurchaseModal: state.modalsReducer[modalsActions.PURCHASE_MODAL],
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -334,6 +333,7 @@ const mapDispatchToProps = dispatch => ({
   updateWallet: ({ type, address }) => dispatch(userActions.updateWallet({ type, address })),
   registerWallet: (address, type) => dispatch(userActions.registerWallet(address, type)),
   stopLoader: () => dispatch(loaderActions.stopAppLoader),
+  setPurchaseModal: show => dispatch(modalsActions.setPurchaseModal(show)),
 });
 
 export default connect(
