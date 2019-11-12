@@ -9,6 +9,8 @@ import { LoaderContent } from "../../utility/constants/LoaderContent";
 export const UPDATE_SERVICE_DETAILS = "UPDATE_SERVICE_DETAILS";
 export const RESET_SERVICE_DETAILS = "RESET_SERVICE_DETAILS";
 export const UPDATE_FREE_CALLS_INFO = "UPDATE_FREE_CALLS_INFO";
+export const START_SERVICE_EXECUTION = "START_SERVICE_EXECUTION";
+export const STOP_SERVICE_EXECUTION = "STOP_SERVICE_EXECUTION";
 
 const resetServiceDetails = dispatch => {
   dispatch({ type: RESET_SERVICE_DETAILS });
@@ -60,4 +62,12 @@ export const fetchMeteringData = ({ orgId, serviceId }) => async dispatch => {
   const { email, token } = await fetchAuthenticatedUser();
   const usageData = await meteringAPI(token, orgId, serviceId, email);
   return dispatch(fetchMeteringDataSuccess(usageData));
+};
+
+export const startServiceExecution = dispatch => {
+  dispatch({ type: START_SERVICE_EXECUTION });
+};
+
+export const stopServiceExecution = dispatch => {
+  dispatch({ type: STOP_SERVICE_EXECUTION });
 };

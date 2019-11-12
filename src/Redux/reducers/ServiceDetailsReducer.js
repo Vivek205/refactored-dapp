@@ -7,6 +7,7 @@ import map from "lodash/map";
 const InitialServiceDetails = {
   details: {},
   freeCalls: {},
+  serviceBeingExecuted: false,
 };
 
 const serviceDetailsReducer = (state = InitialServiceDetails, action) => {
@@ -19,6 +20,12 @@ const serviceDetailsReducer = (state = InitialServiceDetails, action) => {
     }
     case serviceDetailsActions.UPDATE_FREE_CALLS_INFO: {
       return { ...state, freeCalls: action.payload };
+    }
+    case serviceDetailsActions.START_SERVICE_EXECUTION: {
+      return { ...state, serviceBeingExecuted: true };
+    }
+    case serviceDetailsActions.STOP_SERVICE_EXECUTION: {
+      return { ...state, serviceBeingExecuted: false };
     }
     default: {
       return state;

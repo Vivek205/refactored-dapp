@@ -125,11 +125,13 @@ class ServiceDemo extends Component {
 
   serviceRequestStartHandler = () => {
     this.setState({ alert: {} });
+    this.props.startServiceExecution();
     this.props.startLoader();
   };
 
   serviceRequestCompleteHandler = () => {
     this.setState({ isServiceExecutionComplete: true });
+    this.props.stopServiceExecution();
     this.props.stopLoader();
   };
 
@@ -149,6 +151,7 @@ class ServiceDemo extends Component {
       isServiceExecutionComplete: false,
       alert,
     });
+    this.props.stopServiceExecution();
     this.props.stopLoader();
   };
 
@@ -232,13 +235,14 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   fetchMeteringData: args => dispatch(serviceDetailsActions.fetchMeteringData(args)),
   startWalletDetailsPolling: (orgId, groupId) => dispatch(userActions.startWalletDetailsPolling(orgId, groupId)),
   stopWalletDetailsPolling: () => dispatch(userActions.stopWalletDetailsPolling),
-
   fetchOrderDetails: orderId => dispatch(paymentActions.fetchOrderDetails(orderId)),
   updateWallet: walletDetails => dispatch(userActions.updateWallet(walletDetails)),
   updatePaypalInProgress: (orderId, orderType, paymentId, paypalPaymentId, PayerID) =>
     dispatch(paymentActions.updatePaypalInProgress(orderId, orderType, paymentId, paypalPaymentId, PayerID)),
   startInitServiceDemoLoader: () => dispatch(loaderActions.startAppLoader(LoaderContent.INIT_SERVICE_DEMO)),
   fetchUSDConversionRate: () => dispatch(paymentActions.fetchUSDConversionRate),
+  startServiceExecution: () => dispatch(serviceDetailsActions.startServiceExecution),
+  stopServiceExecution: () => dispatch(serviceDetailsActions.STOP_SERVICE_EXECUTION),
 });
 
 export default connect(
