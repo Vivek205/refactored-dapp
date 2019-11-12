@@ -5,6 +5,7 @@ import { ThemeProvider } from "@material-ui/styles";
 import { connect } from "react-redux";
 import ReactGA from "react-ga";
 import { createBrowserHistory } from "history";
+import IdleTimer from "react-idle-timer";
 
 import Routes from "./utility/constants/Routes";
 import { aws_config } from "./config/aws_config";
@@ -20,6 +21,7 @@ import NetworkChangeOverlay from "./components/common/NetworkChangeOverlay";
 import initHotjar from "./assets/externalScripts/hotjar";
 import initGDPRNotification from "./assets/externalScripts/gdpr";
 import PaymentCancelled from "./components/ServiceDetails/PaymentCancelled";
+import { sessionIdleTime } from "./utility/constants/UserSession";
 
 const ForgotPassword = lazy(() => import("./components/Login/ForgotPassword"));
 const ForgotPasswordSubmit = lazy(() => import("./components/Login/ForgotPasswordSubmit"));
@@ -48,8 +50,14 @@ if (process.env.REACT_APP_HOTJAR_ID && process.env.REACT_APP_HOTJAR_SV) {
 initGDPRNotification();
 
 class App extends Component {
+  idleTimer = null;
+
   componentDidMount = () => {
     this.props.fetchUserDetails();
+  };
+
+  handleOnIdle = () => {
+    alert("user is idle");
   };
 
   render() {
@@ -138,6 +146,7 @@ class App extends Component {
         </div>
         <AppLoader />
         <NetworkChangeOverlay />
+        <IdleTimer ref={ref => (this.idleTimer = ref)} onIdle={this.handleOnIdle} timeout={sessionIdleTime} />
       </ThemeProvider>
     );
   }
