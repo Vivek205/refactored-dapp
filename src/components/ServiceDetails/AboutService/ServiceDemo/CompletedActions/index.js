@@ -1,11 +1,22 @@
-import React, { useState } from "react";
+import React from "react";
+import { connect } from "react-redux";
 
 import StyledButton from "../../../../common/StyledButton";
 import { useStyles } from "./styles";
 import UserFeedback from "../UserFeedback";
+import { modalsActions } from "../../../../../Redux/actionCreators";
 
-const CompletedActions = ({ isComplete, feedback, orgId, serviceId, refetchFeedback, handleResetAndRun }) => {
-  const [openUserFeedback, setUserFeedback] = useState(false);
+const CompletedActions = props => {
+  const {
+    isComplete,
+    feedback,
+    orgId,
+    serviceId,
+    refetchFeedback,
+    handleResetAndRun,
+    showUserFeedback,
+    setUserFeedback,
+  } = props;
 
   const handleOpenUserFeedback = () => {
     if (process.env.REACT_APP_SANDBOX) {
@@ -25,7 +36,7 @@ const CompletedActions = ({ isComplete, feedback, orgId, serviceId, refetchFeedb
   return (
     <div className={classes.buttonsContainer}>
       <UserFeedback
-        open={openUserFeedback}
+        open={showUserFeedback}
         handleClose={handleCloseUserFeedback}
         feedback={feedback}
         orgId={orgId}
@@ -38,4 +49,15 @@ const CompletedActions = ({ isComplete, feedback, orgId, serviceId, refetchFeedb
   );
 };
 
-export default CompletedActions;
+const mapStateToProps = state => ({
+  showUserFeedback: state.modalsReducer[modalsActions.FEEDBACK_MODAL],
+});
+
+const mapDispatchToProps = dispatch => ({
+  setUserFeedback: show => dispatch(modalsActions.setFeedbackModal(show)),
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(CompletedActions);

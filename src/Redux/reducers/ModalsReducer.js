@@ -14,6 +14,8 @@ const modalsReducer = (state = InitialModalsState, action) => {
       return { ...state, [modalsActions.LINK_PROVIDER_MODAL]: action.payload };
     case modalsActions.SET_PURCHASE_MODAL:
       return { ...state, [modalsActions.PURCHASE_MODAL]: action.payload };
+    case modalsActions.SET_FEEDBACK_MODAL:
+      return { ...state, [modalsActions.FEEDBACK_MODAL]: action.payload };
     default:
       return state;
   }
