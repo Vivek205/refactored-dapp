@@ -5,12 +5,16 @@ import { withStyles } from "@material-ui/styles";
 import GetStartedDescription from "./GetStartedDescription";
 
 import { GetStartedCategoriesData } from "../../utility/constants/GetStarted";
+import SNETAudioUpload from "../common/SNETAudioUpload";
 import Category from "./Category";
 import { useStyles } from "./styles";
 
 const GetStarted = ({ classes, history }) => {
   return (
     <Grid container spacing={24} className={classes.GetStartedMainContaienr}>
+      <Grid item xs={12} sm={12} md={12} lg={12}>
+        <SNETAudioUpload />
+      </Grid>
       <Grid item xs={12} sm={12} md={12} lg={12} className={classes.TopSection}>
         <GetStartedDescription
           title="One AI Marketplace For All"
@@ -39,7 +43,7 @@ const GetStarted = ({ classes, history }) => {
       </Grid>
       {/*
       <Grid item xs={12} sm={12} md={12} lg={12} className={classes.FeaturesMainContainer}>
-        <Features />
+        // <Features />
       </Grid>
       <Grid item xs={12} sm={12} md={12} lg={12} className={classes.FreeTrialSignUp}>
         <span>No commitment. No credit card required.</span>
