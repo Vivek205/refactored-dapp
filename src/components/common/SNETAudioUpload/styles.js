@@ -24,6 +24,7 @@ export const useStyles = theme => ({
       minWidth: "fit-content",
       flexGrow: 0,
     },
+    "& .MuiTab-textColorPrimary.Mui-selected": { color: theme.palette.text.primary },
     "& .MuiTabs-indicator": {
       bottom: 8,
       backgroundColor: theme.palette.text.primary,
@@ -40,6 +41,7 @@ export const useStyles = theme => ({
     borderRadius: 4,
     display: "flex",
     alignItems: "center",
+    justifyContent: "center",
     cursor: "pointer",
     overflow: "hidden",
   },
@@ -121,15 +123,25 @@ export const useStyles = theme => ({
     justifyContent: "space-around",
     flexGrow: 1,
     width: "100%",
+    backgroundColor: theme.palette.text.snetBackgroundRed,
+    color: theme.palette.text.snetRed,
     "& span": {
       display: "flex",
       alignItems: "center",
       align: "center",
       justifyContent: "space-between",
+      color: theme.palette.text.snetGreyError,
+      "& svg": {
+        fontSize: 16,
+        opacity: 0.9,
+        marginRight: 8,
+      },
       "& p": {
+        color: theme.palette.text.snetGrey,
         fontFamily: theme.typography.primary.main,
         fontSize: 14,
       },
     },
   },
+  fileDragableArea: { backgroundColor: theme.palette.text.snetBackgroundGrey },
 });

@@ -79,6 +79,12 @@ const infoBg = "#DEEAFF";
 const warningBg = "#FDF3E5";
 const warningBorder = "#F18D5A";
 
+const snetBackgroundGrey = "#f5f5f5";
+const snetGrey = "#9e9e9e";
+const snetGreyError = "#616161";
+const snetBackgroundRed = "#ffcdd2";
+const snetRed = "#f44336";
+
 const theme = createMuiTheme({
   palette: {
     text: {
@@ -129,6 +135,11 @@ const theme = createMuiTheme({
       dialogTitle,
       outlinedBtnHoverBg,
       informationBarBg,
+      snetBackgroundGrey,
+      snetGrey,
+      snetGreyError,
+      snetBackgroundRed,
+      snetRed,
     },
   },
   backgroundColor: {
