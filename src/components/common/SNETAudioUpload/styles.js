@@ -30,9 +30,6 @@ export const useStyles = theme => ({
       backgroundColor: theme.palette.text.primary,
     },
   },
-  uploadTabContainer: {
-    "& input": { display: "none" },
-  },
   Box: {
     height: 297,
     borderWidth: 1,
@@ -55,33 +52,6 @@ export const useStyles = theme => ({
     fontVariantCaps: "normal",
     textTransform: "initial",
     fontSize: 14,
-  },
-  uploadBoxContent: {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    "& svg": {
-      color: theme.palette.text.primary,
-      fontSize: 48,
-    },
-  },
-  uploadBoxTitle: {
-    fontFamily: theme.typography.primary.main,
-    fontSize: 16,
-    color: "#9e9e9e",
-    "& a": {
-      color: theme.palette.text.primary,
-      textDecoration: "none",
-    },
-  },
-  uploadBoxDescription: {
-    width: "58%",
-    margin: "0 auto",
-    fontFamily: theme.typography.primary.main,
-    fontSize: 12,
-    color: "#9b9b9b",
-    textAlign: "center",
-    padding: "8px 0",
   },
   urlTabContainer: {
     display: "flex",
@@ -143,5 +113,14 @@ export const useStyles = theme => ({
       },
     },
   },
-  fileDragableArea: { backgroundColor: theme.palette.text.snetBackgroundGrey },
+  fileDragableArea: {
+    height: 215,
+    backgroundColor: theme.palette.text.snetBackgroundGrey,
+    "& > div": {
+      height: "100%",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+    },
+  },
 });

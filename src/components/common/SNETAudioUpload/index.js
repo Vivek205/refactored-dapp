@@ -1,6 +1,5 @@
 import React from "react";
 import ErrorIcon from "@material-ui/icons/Error";
-import { CloudUpload } from "@material-ui/icons";
 
 import { MuiThemeProvider } from "@material-ui/core/styles";
 import { withStyles } from "@material-ui/styles";
@@ -15,8 +14,8 @@ import SnackbarContent from "@material-ui/core/SnackbarContent";
 import ClickAwayListener from "@material-ui/core/ClickAwayListener";
 
 import SwipeableViews from "react-swipeable-views";
-import FileDrop from "react-file-drop";
 
+import UploadTab from "./UploadTab";
 import { useStyles } from "./styles";
 
 class SNETAudioUpload extends React.Component {
@@ -38,39 +37,15 @@ class SNETAudioUpload extends React.Component {
     this.outputImageErrorMessage = "Output image could not be rendered.";
   }
 
-  renderUploadTab() {
-    const { classes, allowedInputTypes } = this.props;
-    return (
-      <Grid item xs={12} sm={12} md={12} lg={12} className={classes.uploadTabContainer}>
-        <FileDrop onDrop={(files, event) => this.handleAudioUpload(files, event)}>
-          <input
-            id="myInput"
-            type="file"
-            accept={allowedInputTypes}
-            onChange={e => this.handleAudioUpload(e.target.files, e)}
-            ref={input => (this.inputElement = input)}
-          />
-          <div onClick={() => this.inputElement.click()} className={(classes.uploadBox, classes.Box)}>
-            <div className={classes.uploadBoxContent}>
-              <CloudUpload />
-              <Typography className={classes.uploadBoxTitle}>
-                Drag and drop file here or <a href="#">click</a>
-              </Typography>
-              <Typography className={classes.uploadBoxDescription} />
-            </div>
-          </div>
-        </FileDrop>
-      </Grid>
-    );
-  }
-
   renderTabs() {
-    const { classes } = this.props;
+    const { classes, allowedInputTypes } = this.props;
     const { value, displayError, errorMessage } = this.state;
     return (
       <div className={(classes.tabStyle, classes.tabsMainContainer)}>
         <SwipeableViews axis="x" index={value}>
-          <div>{this.renderUploadTab()}</div>
+          <div>
+            <UploadTab allowedInputTypes={allowedInputTypes} handleAudioUpload={this.handleAudioUpload} />
+          </div>
         </SwipeableViews>
         <ClickAwayListener onClickAway={() => this.setState({ displayError: false })}>
           <Snackbar
