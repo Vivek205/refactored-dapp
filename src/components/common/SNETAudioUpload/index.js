@@ -1,21 +1,14 @@
 import React from "react";
-import ErrorIcon from "@material-ui/icons/Error";
 
 import { MuiThemeProvider } from "@material-ui/core/styles";
 import { withStyles } from "@material-ui/styles";
 
 import Grid from "@material-ui/core/Grid";
-import Slide from "@material-ui/core/Slide";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import Typography from "@material-ui/core/Typography";
-import Snackbar from "@material-ui/core/Snackbar";
-import SnackbarContent from "@material-ui/core/SnackbarContent";
-import ClickAwayListener from "@material-ui/core/ClickAwayListener";
 
-import SwipeableViews from "react-swipeable-views";
-
-import UploadTab from "./UploadTab";
+import SNETAudioTabs from "./SNETAudioTabs";
 import { useStyles } from "./styles";
 
 class SNETAudioUpload extends React.Component {
@@ -23,58 +16,29 @@ class SNETAudioUpload extends React.Component {
     super(props);
     this.state = {
       mainState: this.props.outputImage ? "display" : "initial", // initial, loading, uploaded, display
-      value: 0,
+      activeTab: 0,
       searchText: null,
       errorMessage: null,
       displayError: false,
     };
 
+    this.handleClikAway = this.handleClikAway.bind(this);
+
     // Error Messages
     this.urlErrorMessage = "Incorrect URL or permission denied by server.";
     this.fileSizeError = "File size exceeds limits (" + this.props.maxImageSize / 1000000 + "mb).";
     this.fileTypeError = "File type not accepted. Allowed: " + this.props.allowedInputTypes + ".";
-    this.inputImageErrorMessage = "Content image could not be rendered.";
-    this.outputImageErrorMessage = "Output image could not be rendered.";
+    this.inputAudioErrorMessage = "Content image could not be rendered.";
+    this.outputAudioErrorMessage = "Output image could not be rendered.";
   }
 
-  renderTabs() {
-    const { classes, allowedInputTypes } = this.props;
-    const { value, displayError, errorMessage } = this.state;
-    return (
-      <div className={(classes.tabStyle, classes.tabsMainContainer)}>
-        <SwipeableViews axis="x" index={value}>
-          <div>
-            <UploadTab allowedInputTypes={allowedInputTypes} handleAudioUpload={this.handleAudioUpload} />
-          </div>
-        </SwipeableViews>
-        <ClickAwayListener onClickAway={() => this.setState({ displayError: false })}>
-          <Snackbar
-            className={classes.tabsSnackbar}
-            open={displayError}
-            autoHideDuration={5000}
-            TransitionComponent={Slide}
-            transitionDuration={300}
-            onClose={() => this.setState({ displayError: false })}
-          >
-            <SnackbarContent
-              className={classes.tabsSnackbarContent}
-              aria-describedby="client-snackbar"
-              message={
-                <span>
-                  <ErrorIcon />
-                  <Typography>{errorMessage}</Typography>
-                </span>
-              }
-            />
-          </Snackbar>
-        </ClickAwayListener>
-      </div>
-    );
-  }
+  handleClikAway = () => {
+    this.setState({ errorMessage: false });
+  };
 
   render() {
-    const { classes, disableUploadTab } = this.props;
-    const { mainState, value } = this.state;
+    const { classes, disableUploadTab, allowedInputTypes } = this.props;
+    const { mainState, activeTab, displayError, errorMessage } = this.state;
 
     return (
       <div className={classes.mainContainer}>
@@ -88,7 +52,7 @@ class SNETAudioUpload extends React.Component {
             <Grid item xs={6} className={classes.mainTabs}>
               <MuiThemeProvider theme={this.theme}>
                 <Tabs
-                  value={value}
+                  value={activeTab}
                   onChange={this.handleTabChange}
                   indicatorColor="primary"
                   textColor="primary"
@@ -103,7 +67,16 @@ class SNETAudioUpload extends React.Component {
             </Grid>
           </Grid>
           <Grid item xs={12} className={classes.fileDragableArea}>
-            {(mainState === "initial" || mainState === "display") && this.renderTabs()}
+            {(mainState === "initial" || mainState === "display") && (
+              <SNETAudioTabs
+                activeTab={activeTab}
+                allowedInputTypes={allowedInputTypes}
+                displayError={displayError}
+                errorMessage={errorMessage}
+                handleAudioUpload={this.handleAudioUpload}
+                handleClikAway={this.handleClikAway}
+              />
+            )}
           </Grid>
         </Grid>
       </div>
