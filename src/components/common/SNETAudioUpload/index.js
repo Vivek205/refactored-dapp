@@ -34,9 +34,17 @@ class SNETAudioUpload extends React.Component {
     return null;
   };
 
+  shouldSNETAudioTabsEnable = () => {
+    return this.state.mainState === "initial" || this.state.mainState === "display";
+  };
+
+  showMaterialUiTab = () => {
+    return this.state.mainState !== "uploaded" && !(this.state.mainState === "display") && !this.props.disableUploadTab;
+  };
+
   render() {
-    const { classes, disableUploadTab, allowedInputTypes } = this.props;
-    const { mainState, activeTab, displayError, errorMessage } = this.state;
+    const { classes, allowedInputTypes } = this.props;
+    const { activeTab, displayError, errorMessage } = this.state;
 
     return (
       <div className={classes.mainContainer}>
@@ -57,24 +65,25 @@ class SNETAudioUpload extends React.Component {
                   variant="fullWidth"
                   TabIndicatorProps
                 >
-                  {mainState !== "uploaded" && !(mainState === "display") && !disableUploadTab && (
-                    <Tab value={0} label={<span className={classes.tabLabelStyle}>Upload</span>} />
-                  )}
+                  <Tab
+                    value={0}
+                    label={<span className={classes.tabLabelStyle}>Upload</span>}
+                    disabled={this.showMaterialUiTab()}
+                  />
                 </Tabs>
               </MuiThemeProvider>
             </Grid>
           </Grid>
           <Grid item xs={12} className={classes.fileDragableArea}>
-            {(mainState === "initial" || mainState === "display") && (
-              <SNETAudioTabs
-                activeTab={activeTab}
-                allowedInputTypes={allowedInputTypes}
-                displayError={displayError}
-                errorMessage={errorMessage}
-                handleAudioUpload={this.handleAudioUpload}
-                handleClikAway={this.handleClikAway}
-              />
-            )}
+            <SNETAudioTabs
+              activeTab={activeTab}
+              allowedInputTypes={allowedInputTypes}
+              displayError={displayError}
+              errorMessage={errorMessage}
+              handleAudioUpload={this.handleAudioUpload}
+              handleClikAway={this.handleClikAway}
+              show={this.shouldSNETAudioTabsEnable()}
+            />
           </Grid>
         </Grid>
       </div>

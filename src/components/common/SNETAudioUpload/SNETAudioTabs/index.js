@@ -23,7 +23,11 @@ const SNETAudioTabs = ({
   errorMessage,
   handleAudioUpload,
   handleClikAway,
+  show,
 }) => {
+  if (!show) {
+    return null;
+  }
   return (
     <div className={(classes.tabStyle, classes.tabsMainContainer)}>
       <SwipeableViews axis="x" index={activeTab}>
