@@ -1,5 +1,5 @@
 import React from "react";
-
+import PropTypes from "prop-types";
 import { CloudUpload } from "@material-ui/icons";
 import { withStyles } from "@material-ui/styles";
 import Grid from "@material-ui/core/Grid";
@@ -33,6 +33,11 @@ const UploadTab = ({ classes, allowedInputTypes, handleAudioUpload }) => {
       </FileDrop>
     </Grid>
   );
+};
+
+UploadTab.propTypes = {
+  allowedInputTypes: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
+  handleAudioUpload: PropTypes.func,
 };
 
 export default withStyles(useStyles)(UploadTab);

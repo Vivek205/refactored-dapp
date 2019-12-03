@@ -23,17 +23,15 @@ class SNETAudioUpload extends React.Component {
     };
 
     this.handleClikAway = this.handleClikAway.bind(this);
-
-    // Error Messages
-    this.urlErrorMessage = "Incorrect URL or permission denied by server.";
-    this.fileSizeError = "File size exceeds limits (" + this.props.maxImageSize / 1000000 + "mb).";
-    this.fileTypeError = "File type not accepted. Allowed: " + this.props.allowedInputTypes + ".";
-    this.inputAudioErrorMessage = "Content image could not be rendered.";
-    this.outputAudioErrorMessage = "Output image could not be rendered.";
+    this.handleAudioUpload = this.handleAudioUpload.bind(this);
   }
 
   handleClikAway = () => {
     this.setState({ errorMessage: false });
+  };
+
+  handleAudioUpload = () => {
+    return null;
   };
 
   render() {

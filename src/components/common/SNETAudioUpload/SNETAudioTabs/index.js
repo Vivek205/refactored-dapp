@@ -1,5 +1,5 @@
 import React from "react";
-
+import PropTypes from "prop-types";
 import ErrorIcon from "@material-ui/icons/Error";
 
 import { withStyles } from "@material-ui/styles";
@@ -54,6 +54,14 @@ const SNETAudioTabs = ({
       </ClickAwayListener>
     </div>
   );
+};
+
+SNETAudioTabs.propTypes = {
+  allowedInputTypes: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
+  activeTab: PropTypes.bool,
+  displayError: PropTypes.bool,
+  errorMessage: PropTypes.string,
+  handleAudioUpload: PropTypes.func,
 };
 
 export default withStyles(useStyles)(SNETAudioTabs);
