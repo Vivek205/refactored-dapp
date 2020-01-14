@@ -37,7 +37,7 @@ export const APIPaths = {
   FILTER_DATA: "/service?attribute=",
   FEEDBACK: "/feedback",
   GET_SIGNATURE: "/sign-call",
-  DELETE_USER: "/delete-user",
+  DELETE_USER: "/user/delete",
   FREE_CALL_USAGE: "/usage/freecalls",
   SIGNER_FREE_CALL: "/free-call",
   SIGNER_STATE_SERVICE: "/state-service",
