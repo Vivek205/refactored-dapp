@@ -23,7 +23,7 @@ export const paymentTitles = {
 };
 
 const GeneralAccountWallet = props => {
-  const { classes, channelInfo, handleContinue, paypalInProgress, anyGeneralWallet, anyPendingTxn } = props;
+  const { classes, channelInfo, handleContinue, paypalInProgress, anyGeneralWallet, anyPendingTxn, orgName } = props;
 
   const [showCreateWalletPopup, setShowCreateWalletPopup] = useState(false);
   const [showTopupWallet, setShowTopupWallet] = useState(false);
@@ -69,7 +69,7 @@ const GeneralAccountWallet = props => {
       </div>
       <CreateWallet visible={showCreateWalletPopup} setVisibility={setShowCreateWalletPopup} />
       <TopupWallet visible={showTopupWallet} setVisibility={setShowTopupWallet} />
-      <LinkProvider visible={showLinkProvider} setVisibility={setShowLinkProvider} />
+      <LinkProvider visible={showLinkProvider} setVisibility={setShowLinkProvider} orgName={orgName} />
     </Fragment>
   );
 };
@@ -86,7 +86,4 @@ const mapDispatchToProps = dispatch => ({
   fetchOrderDetails: orderId => dispatch(paymentActions.fetchOrderDetails(orderId)),
 });
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(withStyles(useStyles)(GeneralAccountWallet));
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(useStyles)(GeneralAccountWallet));

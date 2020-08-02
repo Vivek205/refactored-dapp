@@ -27,7 +27,7 @@ class LinkProviderPopup extends Component {
   };
 
   render() {
-    const { visible } = this.props;
+    const { visible, orgName } = this.props;
 
     const { orderType, title, signature } = this.state;
 
@@ -40,6 +40,7 @@ class LinkProviderPopup extends Component {
         handleLostPrivateKey={this.handleLostPrivateKey}
         signature={signature}
         updateSignature={this.handleSignatureChange}
+        orgName={orgName}
       />
     );
   }

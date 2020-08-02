@@ -186,6 +186,7 @@ class PaymentPopup extends Component {
       channelInfo,
       handleLostPrivateKey,
       updateSignature,
+      orgName,
     } = this.props;
     const { activeSection, privateKeyGenerated, amount, item, quantity, userProvidedPrivateKey } = this.state;
 
@@ -217,7 +218,13 @@ class PaymentPopup extends Component {
       {
         key: "summary",
         component: (
-          <Summary amount={amount} item={item} quantity={quantity} handlePaymentComplete={this.handlePaymentComplete} />
+          <Summary
+            orgName={orgName}
+            amount={amount}
+            item={item}
+            quantity={quantity}
+            handlePaymentComplete={this.handlePaymentComplete}
+          />
         ),
       },
     ];
@@ -289,9 +296,4 @@ const mapDispatchToProps = dispatch => ({
   paypalCompleted: () => dispatch(paymentActions.updatePaypalCompleted),
 });
 
-export default withRouter(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(withStyles(useStyles)(PaymentPopup))
-);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(withStyles(useStyles)(PaymentPopup)));

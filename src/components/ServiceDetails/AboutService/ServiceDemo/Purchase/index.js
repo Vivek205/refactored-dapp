@@ -8,6 +8,7 @@ const Purchase = ({
   freeCallsRemaining,
   freeCallsAllowed,
   wallet,
+  orgName,
   groupInfo,
   handlePurchaseError,
   isServiceAvailable,
@@ -20,6 +21,7 @@ const Purchase = ({
         groupInfo={groupInfo}
         handlePurchaseError={handlePurchaseError}
         isServiceAvailable={isServiceAvailable}
+        orgName={orgName}
       />
     );
   }

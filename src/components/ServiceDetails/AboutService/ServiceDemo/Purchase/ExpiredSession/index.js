@@ -73,6 +73,7 @@ class ExpiredSession extends Component {
       handlePurchaseError,
       isServiceAvailable,
       channelInfo,
+      orgName,
     } = this.props;
     const channelPaymentOptions = [
       { value: walletTypes.GENERAL, label: "General Account Wallet" },
@@ -114,6 +115,7 @@ class ExpiredSession extends Component {
           show={wallet.type !== walletTypes.DEFAULT}
           metamask={wallet.type === walletTypes.METAMASK}
           generalWalletProps={{ handleContinue: handleComplete }}
+          orgName={orgName}
           metamaskProps={{
             handleContinue: handleComplete,
             groupInfo,
@@ -139,7 +141,4 @@ const mapDispatchToProps = dispatch => ({
   stopWalletDetailsPolling: () => dispatch(userActions.stopWalletDetailsPolling),
 });
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(withStyles(useStyles)(ExpiredSession));
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(useStyles)(ExpiredSession));

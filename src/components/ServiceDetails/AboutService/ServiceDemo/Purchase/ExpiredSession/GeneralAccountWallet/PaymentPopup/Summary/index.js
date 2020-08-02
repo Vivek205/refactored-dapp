@@ -10,9 +10,12 @@ import InfoIcon from "@material-ui/icons/Info";
 import { agiInDecimal } from "../../../../../../../../../utility/PricingStrategy";
 
 const Summary = props => {
-  const { classes, amount, item, quantity, handlePaymentComplete } = props;
+  const { classes, amount, item, quantity, handlePaymentComplete, orgName } = props;
 
-  const columns = [{ key: "item", label: "Total $USD spent" }, { key: "amount", label: `$${amount}` }];
+  const columns = [
+    { key: "item", label: "Total $USD spent" },
+    { key: "amount", label: `$${amount}` },
+  ];
   const rows = [
     {
       key: 1,
@@ -21,10 +24,12 @@ const Summary = props => {
     },
   ];
 
+  console.log("orgName", orgName);
+
   return (
     <div className={classes.summaryContainer}>
       <Typography variant="body2" className={classes.successMsg}>
-        Successfully Created Wallet for : Service Provider 1
+        Successfully Created Wallet for : {orgName}
       </Typography>
       <StyledTable title="Transaction Receipt" columns={columns} rows={rows} />
       <div className={classes.btnContainer}>

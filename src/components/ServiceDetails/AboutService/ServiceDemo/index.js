@@ -199,6 +199,7 @@ class ServiceDemo extends Component {
         <PurchaseToggler
           groupInfo={groupInfo}
           purchaseCompleted={purchaseCompleted}
+          orgName={service.organization_name}
           purchaseProps={{
             handleComplete: this.handlePurchaseComplete,
             freeCallsRemaining,
