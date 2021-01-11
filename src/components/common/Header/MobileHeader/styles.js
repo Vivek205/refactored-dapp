@@ -70,7 +70,7 @@ export const useStyles = theme => ({
       marginLeft: "29%",
       justifyContent: "flex-start",
       "& > div": {
-        "@media (max-width:550px)": { display: "none" },
+        "@media (max-width:1024px)": { display: "none" },
       },
       "@media(max-width: 480px)": { margin: 0 },
       "& li": {
