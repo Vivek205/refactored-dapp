@@ -18,6 +18,8 @@ import ErrorBox from "../common/ErrorBox";
 import SeoMetadata from "../common/SeoMetadata";
 import Routes from "../../utility/constants/Routes";
 
+export const HERO_IMG = "hero_image";
+
 class ServiceDetails extends Component {
   constructor(props) {
     super(props);
@@ -128,7 +130,7 @@ class ServiceDetails extends Component {
         <SeoMetadata
           title={service.display_name}
           description={service.short_description}
-          image={service.assets_url.hero_image}
+          image={service.org_assets_url.hero_image}
           url={seoURL}
           keywords={service.tags}
         />
@@ -145,7 +147,7 @@ class ServiceDetails extends Component {
             <TitleCard
               organizationName={service.organization_name}
               display_name={service.display_name}
-              serviceImg={service.assets_url && service.assets_url.hero_image}
+              service={service.media}
               orgImg={service.org_assets_url && service.org_assets_url.hero_image}
               star_rating={service.service_rating && service.service_rating.rating}
               totalRating={service.service_rating ? service.service_rating.total_users_rated : 0}
