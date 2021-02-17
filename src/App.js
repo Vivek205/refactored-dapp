@@ -1,5 +1,5 @@
 import React, { Component, lazy, Suspense } from "react";
-import Amplify from "aws-amplify";
+import Amplify from "@aws-amplify/core";
 import { Router, Switch, Route } from "react-router-dom";
 import { ThemeProvider } from "@material-ui/styles";
 import { connect } from "react-redux";
