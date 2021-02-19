@@ -49,6 +49,12 @@ class ServiceDemo extends Component {
       await Promise.all(asyncCalls);
       this.scrollToHash();
       this.props.stopLoader();
+
+      if (window.location.href.indexOf("#demo") > -1) {
+        this.props.scrollToView();
+        const currentUrl = this.props.location.pathname;
+        this.props.history.push(currentUrl);
+      }
     } catch (error) {
       this.props.stopLoader();
     }
@@ -154,7 +160,14 @@ class ServiceDemo extends Component {
   };
 
   handleResetAndRun = () => {
-    this.setState({ purchaseCompleted: false, isServiceExecutionComplete: false, alert: {} });
+    this.setState(prevState => {
+      return {
+        purchaseCompleted: false,
+        isServiceExecutionComplete: false,
+        alert: {},
+        progressText: prevState.progressText.map(item => ({ label: item.label })),
+      };
+    });
     this.fetchFreeCallsUsage();
   };
 
