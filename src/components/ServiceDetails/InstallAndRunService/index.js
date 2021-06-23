@@ -25,6 +25,8 @@ class InstallAndRunService extends Component {
     publickey: "",
     downloadTokenURL: "",
     alert: {},
+    jsZipUrl: "",
+    pythonZipUrl: "",
   };
 
   handleTabChange = activeTab => {
@@ -56,22 +58,47 @@ class InstallAndRunService extends Component {
     this.setState({ publickey: event.currentTarget.value, alert: {}, downloadTokenURL: "" });
   };
 
+  getZipToDownload = language => {
+    const { service } = this.props;
+    service.media.map(details => {
+      if (details.file_type === "grpc-stub" && details.asset_type === "grpc-stub/nodejs" && language === "js") {
+        this.setState({ jsZipUrl: details.url });
+      } else if (
+        details.file_type === "grpc-stub" &&
+        details.asset_type === "grpc-stub/python" &&
+        language === "python"
+      ) {
+        this.setState({ pythonZipUrl: details.url });
+      } else {
+        return null;
+      }
+    });
+  };
+
   render() {
     const { classes, service } = this.props;
-    const { activeTab, downloadTokenURL, alert } = this.state;
+    const { activeTab, downloadTokenURL, alert, pythonZipUrl, jsZipUrl } = this.state;
     const tabs = [
       {
         name: "Python",
         activeIndex: 0,
         component: (
-          <Python description="Download the Python SDK to help you integrate this AI service with your application. Once you setup your configuration, use the token generator below to test the servcie with a number of free calls." />
+          <Python
+            description="Download the Python SDK to help you integrate this AI service with your application. Once you setup your configuration, use the token generator below to test the servcie with a number of free calls."
+            getZipToDownload={language => this.getZipToDownload(language)}
+            zipUrl={pythonZipUrl}
+          />
         ),
       },
       {
         name: "Javascript",
         activeIndex: 1,
         component: (
-          <Javascript description="Download the Javascript SDK to help you integrate this AI service with your application. Once you setup your configuration, use the token generator below to test the servcie with a number of free calls." />
+          <Javascript
+            description="Download the Javascript SDK to help you integrate this AI service with your application. Once you setup your configuration, use the token generator below to test the servcie with a number of free calls."
+            getZipToDownload={language => this.getZipToDownload(language)}
+            zipUrl={jsZipUrl}
+          />
         ),
       },
     ];

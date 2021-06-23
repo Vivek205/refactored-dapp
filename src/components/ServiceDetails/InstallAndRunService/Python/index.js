@@ -5,13 +5,19 @@ import { useStyles } from "../styles";
 import CodeSnippet from "../../../common/CodeSnippet";
 import StyledButton from "../../../common/StyledButton";
 
-const Python = ({ classes, description }) => {
+const Python = ({ classes, description, getZipToDownload, zipUrl }) => {
+  const handleDownloadClick = () => {
+    getZipToDownload("python");
+  };
+
   return (
     <section className={classes.languageTabSection}>
       <div className={classes.descriptionBtnsContainer}>
         <p>{description}</p>
         <div className={classes.btnContainer}>
-          <StyledButton type="blue" btnText="Download Integration files" />
+          <a href={zipUrl} onClick={handleDownloadClick}>
+            <StyledButton type="blue" btnText="Download Integration files" />
+          </a>
         </div>
       </div>
       <div className={classes.setingUpFilesContainer}>
