@@ -2,18 +2,25 @@ import React from "react";
 import Grid from "@material-ui/core/Grid";
 import { withStyles } from "@material-ui/styles";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
-import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 
 import { useStyles } from "./styles";
 import DemoToggler from "./DemoToggler";
 import ServiceOverview from "./ServiceOverview";
-import Routes from "../../../utility/constants/Routes";
 import CreatorDetails from "../CreatorDetails";
 import ProjectDetails from "../ProjectDetails";
 import MediaGallery from "../MediaGallery";
+import PromoBox from "./PromoBox";
 
-const AboutService = ({ classes, isLoggedIn, service, history, serviceAvailable, demoExampleRef, scrollToView }) => {
+const AboutService = ({
+  classes,
+  isLoggedIn,
+  service,
+  history,
+  serviceAvailable,
+  demoExampleRef,
+  scrollToView,
+  noDemoComponent,
+}) => {
   return (
     <Grid container spacing={24} className={classes.aboutContainer}>
       <Grid item xs={12} sm={8} md={8} lg={8} className={classes.leftSideSection}>
@@ -26,10 +33,10 @@ const AboutService = ({ classes, isLoggedIn, service, history, serviceAvailable,
           serviceAvailable={serviceAvailable}
           demoExampleRef={demoExampleRef}
           scrollToView={scrollToView}
+          noDemoComponent={noDemoComponent}
         />
-        <div className={classes.backToLink}>
-          <ArrowBackIcon />
-          <Link to={`/${Routes.AI_MARKETPLACE}`}>Back to AI Marketplace</Link>
+        <div className={classes.showOnNrmalResolution}>
+          <PromoBox />
         </div>
       </Grid>
 
@@ -46,6 +53,9 @@ const AboutService = ({ classes, isLoggedIn, service, history, serviceAvailable,
           serviceId={service.service_id}
         />
         <MediaGallery data={service.media} />
+        <div className={classes.showInResponsive}>
+          <PromoBox />
+        </div>
       </Grid>
     </Grid>
   );
